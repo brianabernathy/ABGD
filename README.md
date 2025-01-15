@@ -34,6 +34,7 @@ Now that the target variant sites and consensus alleles have been identified, th
 
 `tail -n +2 /path/to/ABGD/test_data/test.ref.cons.alleles | cut -f 1,2 > /path/to/ABGD/test_data/test.ref.target.variant.sites`
 
+[!NOTE]
 Please note, depending on your preferred variant caller, it may be necessary to include a sample from each consensus group to ensure that all consensus alleles and corresponding allele depths appear in the sample variant file.
 
 #### without normalization
@@ -49,12 +50,15 @@ If normalized dosage output is desired, the variant file containing allopolyploi
 Additionally, a tab-seperated coverage file is required, which defines approximate genome coverages for the normalization reference and samples. See the example below or [test.samples.cov](https://github.com/brianabernathy/ABGD/blob/main/test_data/test.samples.cov) in the [test_data](https://github.com/brianabernathy/ABGD/tree/main/test_data) directory for an example.
 
 ```
-#sample	cov
+#sample	coverage
 norm.ref	100.5
 sample1	30.5
 sample2	30.2
 sample3	30.2
 ```
+
+Normalization is performed using the following formula, where 'cons allele X' represents one of the previously identified consensus alleles:
+`sample cons allele X norm = (sample cons allele X count / sample mean cov) / (norm.ref cons allele X count / norm.ref mean cov)`
 
 Once these conditions are met, `abgd_sample_dosage.pl` can be run to produce normalized group dosages for each sample using the command below.
 
