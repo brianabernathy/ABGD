@@ -34,8 +34,8 @@ Now that the target variant sites and consensus alleles have been identified, th
 
 `tail -n +2 /path/to/ABGD/test_data/test.ref.cons.alleles | cut -f 1,2 > /path/to/ABGD/test_data/test.ref.target.variant.sites`
 
-[!NOTE]
-Please note, depending on your preferred variant caller, it may be necessary to include a sample from each consensus group to ensure that all consensus alleles and corresponding allele depths appear in the sample variant file.
+> [!NOTE]
+> Please note, depending on your preferred variant caller, it may be necessary to include a sample from each consensus group to ensure that all consensus alleles and corresponding allele depths appear in the sample variant file.
 
 #### without normalization
 
