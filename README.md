@@ -58,6 +58,7 @@ sample3	30.2
 ```
 
 Normalization is performed using the following formula, where 'cons allele X' represents one of the previously identified consensus alleles:
+
 `sample cons allele X norm = (sample cons allele X count / sample mean cov) / (norm.ref cons allele X count / norm.ref mean cov)`
 
 Once these conditions are met, `abgd_sample_dosage.pl` can be run to produce normalized group dosages for each sample using the command below.
