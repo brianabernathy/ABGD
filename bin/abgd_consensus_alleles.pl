@@ -297,7 +297,7 @@ sub print_summary {
 sub proc_vcf_gt {
 	my $gt_field = shift();
 	my $depth;
-	my $pri_allele_index;
+	my $pri_allele_index = 0;
 	my @ad_pct = ();
 	my @split_gt_fields = split(/\:/, $gt_field);
 	my $ads = $split_gt_fields[$gt_ad_index];
@@ -307,8 +307,6 @@ sub proc_vcf_gt {
 		$depth += $ad;
 	}
 
-	my $pri_allele_pct = 0;
-
 	foreach my $index (0..$#ads) {
 		my $ad = $ads[$index];
 		my $pct = 0;
@@ -317,11 +315,11 @@ sub proc_vcf_gt {
 			$pct = sprintf("%0.2f", $ad / $depth * 100);
 		}
 
-		if ($pct > $pri_allele_pct) {
+		push(@ad_pct, $pct);
+
+		if ($pct > $ad_pct[$pri_allele_index]) {
 			$pri_allele_index = $index;
 		}
-
-		push(@ad_pct, $pct);
 	}
 
 	return($depth, $pri_allele_index, @ad_pct);
